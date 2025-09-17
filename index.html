@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loja Fake - Tênis</title>
+  <title>Loja Fake - Vans & Mais</title>
   <style>
     :root{--accent:#0b5ed7;--muted:#6b7280}
     *{box-sizing:border-box}
@@ -28,7 +28,6 @@
 
     footer{text-align:center;color:var(--muted);padding:22px 0;margin-top:28px}
 
-    /* Cart drawer */
     .drawer{position:fixed;right:18px;top:84px;width:360px;max-width:92vw;background:#fff;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,.2);transform:translateX(120%);transition:transform .28s ease;z-index:60;padding:14px}
     .drawer.open{transform:translateX(0)}
     .drawer h4{margin:0 0 10px}
@@ -38,7 +37,6 @@
     .qty button{padding:6px;border-radius:6px;border:1px solid #e6e9ef;background:#fff}
     .checkout{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
 
-    /* modal */
     .modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.45);display:none;align-items:center;justify-content:center}
     .modal{background:#fff;padding:20px;border-radius:12px;max-width:420px;width:92%}
 
@@ -51,10 +49,10 @@
       <div class="logo">GV</div>
       <div>
         <div class="title">Barão Von Gepeto — Loja Fake</div>
-        <div class="muted" style="color:var(--muted);font-size:13px">Tênis apenas pra teste. Pagamento falso.</div>
+        <div class="muted" style="color:var(--muted);font-size:13px">Produtos fictícios para teste. Nenhum pagamento real.</div>
       </div>
     </div>
-    <div class="search"><input class="search-input" placeholder="Procurar tênis... (ex: Ultraboost)" id="search" /></div>
+    <div class="search"><input class="search-input" placeholder="Procurar produto..." id="search" /></div>
     <div style="display:flex;gap:8px;align-items:center">
       <button class="cart-btn" id="open-cart">Carrinho (<span id="cart-count">0</span>)</button>
     </div>
@@ -62,13 +60,13 @@
 
   <main>
     <section>
-      <h2>Ofertas de Tênis</h2>
-      <p style="color:var(--muted)">Produtos fictícios criados para teste e demonstração. Não cobramos nada.</p>
+      <h2>Produtos</h2>
+      <p style="color:var(--muted)">Tênis Vans, tênis de trilha, caixas de som e itens para bateria eletrônica. Todos fictícios.</p>
       <div class="grid" id="products"></div>
     </section>
 
     <footer>
-      Criado por <strong>Barão Von Gepeto</strong> — protótipo estático. Use à vontade, ô Robson.
+      Criado por <strong>Barão Von Gepeto</strong> — protótipo estático. Divirta-se, Robson.
     </footer>
   </main>
 
@@ -98,16 +96,19 @@
   </div>
 
   <script>
-    // Produtos de exemplo
     const products = [
-      {id:1,name:'Ultra Runner 2000',price:389.90,img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=fa2f7d1d3d3fef3e0d8e4b7b9a7e8c2c'},
-      {id:2,name:'CloudWalk Pro',price:299.50,img:'https://images.unsplash.com/photo-1528701800489-476c1a740b9c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6f9d0fae2f3c7f1f6b4a2c8a3e92c1aa'},
-      {id:3,name:'StreetFlex Low',price:219.00,img:'https://images.unsplash.com/photo-1600180758890-8a1fb31b8e9a?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=8c4e3f3b4d8b6a3d9c6e2d1a0b9c4f5f'},
-      {id:4,name:'TrailMaster GTX',price:459.00,img:'https://images.unsplash.com/photo-1560343090-f0409e92791a?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b6c1e2d4f5a6b7c8d9e0f1a2b3c4d5e'},
-      {id:5,name:'RunLite 3',price:179.90,img:'https://images.unsplash.com/photo-1540202404-1b9a2d0b8d2e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc123def4567890abc123def4567890'}
+      { id:1, name:'Vans Old Skool Preto/Branco', price:449.90, img:'https://images.unsplash.com/photo-1618354692102-1edbb6f5ec7a?q=80&w=800&auto=format&fit=crop' },
+      { id:2, name:'Vans Era Checkerboard', price:399.90, img:'https://images.unsplash.com/photo-1603775020542-497f5165828e?q=80&w=800&auto=format&fit=crop' },
+      { id:3, name:'Vans Sk8-Hi Preto', price:479.00, img:'https://images.unsplash.com/photo-1593032465171-dc3129123b6a?q=80&w=800&auto=format&fit=crop' },
+      { id:4, name:'Vans Slip-On Classic', price:379.90, img:'https://images.unsplash.com/photo-1556906781-9d5d102f3a04?q=80&w=800&auto=format&fit=crop' },
+      { id:5, name:'Tênis de Trilha Mountain Pro', price:599.90, img:'https://images.unsplash.com/photo-1600185366274-53f8ad2fa93b?q=80&w=800&auto=format&fit=crop' },
+      { id:6, name:'Caixa de Som Bluetooth BassMax', price:349.90, img:'https://images.unsplash.com/photo-1580894908361-3e1ff1b7f4ab?q=80&w=800&auto=format&fit=crop' },
+      { id:7, name:'Caixa de Som Portátil SoundGo', price:279.90, img:'https://images.unsplash.com/photo-1573496770384-2f34ef4f4e71?q=80&w=800&auto=format&fit=crop' },
+      { id:8, name:'Pad de Bateria Eletrônica XP', price:499.90, img:'https://images.unsplash.com/photo-1606813901863-682c1d3b94b1?q=80&w=800&auto=format&fit=crop' },
+      { id:9, name:'Bateria Eletrônica Compacta', price:899.90, img:'https://images.unsplash.com/photo-1599384075900-bfd67b69df0d?q=80&w=800&auto=format&fit=crop' },
+      { id:10, name:'Kit de Pedais e Acessórios', price:249.90, img:'https://images.unsplash.com/photo-1627928011095-3e4b0ee65e2f?q=80&w=800&auto=format&fit=crop' }
     ];
 
-    // state
     let cart = JSON.parse(localStorage.getItem('cart_v1')||'{}');
 
     const $products = document.getElementById('products');
@@ -128,7 +129,7 @@
       $products.innerHTML='';
       items.forEach(p=>{
         const div=document.createElement('div');div.className='card';
-        div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><div class="meta">Modelo disponível — Estoque: 12</div><div class="price">${formatBRL(p.price)}</div><div class="add"><button class="secondary" onclick="viewDetails(${p.id})">Ver</button><button class="cart-btn" onclick="addToCart(${p.id})">Adicionar</button></div>`;
+        div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><div class="meta">Estoque disponível — 12 unidades</div><div class="price">${formatBRL(p.price)}</div><div class="add"><button class="secondary" onclick="viewDetails(${p.id})">Ver</button><button class="cart-btn" onclick="addToCart(${p.id})">Adicionar</button></div>`;
         $products.appendChild(div);
       })
     }
@@ -137,7 +138,7 @@
       const p = products.find(x=>x.id===id);
       $modalBg.style.display='flex';
       document.getElementById('modal-title').innerText = p.name;
-      document.getElementById('modal-body').innerHTML = `<img src="${p.img}" style="width:100%;border-radius:8px;margin-bottom:10px"><strong>Preço:</strong> ${formatBRL(p.price)}<br><br>Descrição: Tênis fictício para demonstração. Sem cobrança.`;
+      document.getElementById('modal-body').innerHTML = `<img src="${p.img}" style="width:100%;border-radius:8px;margin-bottom:10px"><strong>Preço:</strong> ${formatBRL(p.price)}<br><br>Descrição: Produto fictício para demonstração. Nenhum pagamento será cobrado.`;
     }
 
     function saveCart(){localStorage.setItem('cart_v1',JSON.stringify(cart));renderCart();}
@@ -173,10 +174,7 @@
       const el=document.createElement('div');el.style.position='fixed';el.style.right='18px';el.style.bottom='18px';el.style.background='#111';el.style.color='#fff';el.style.padding='10px 14px';el.style.borderRadius='8px';el.style.boxShadow='0 8px 24px rgba(2,6,23,.25)';el.innerText=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),1600);
     }
 
-    // drawer toggle
     $openCart.addEventListener('click',()=>{$drawer.classList.toggle('open')});
-
-    // checkout
     $checkoutBtn.addEventListener('click',()=>{
       $modalBg.style.display='flex';
       document.getElementById('modal-title').innerText='Checkout falso — Confirme seu pedido';
@@ -191,23 +189,18 @@
 
     $modalClose.addEventListener('click',()=>{$modalBg.style.display='none'});
     $modalConfirm.addEventListener('click',()=>{
-      // fake order processing
       $modalBg.style.display='none'; $drawer.classList.remove('open');
       cart = {}; saveCart();
       flash('Pedido confirmado (fake). Obrigado por testar.');
     });
 
-    // close modal by bg
     $modalBg.addEventListener('click',(e)=>{if(e.target===$modalBg)$modalBg.style.display='none'});
-
-    // search
     $search.addEventListener('input',()=>{
       const q = $search.value.trim().toLowerCase();
       if(!q) renderProducts(products);
       else renderProducts(products.filter(p=>p.name.toLowerCase().includes(q)));
     });
 
-    // init
     renderProducts(products);
     renderCart();
   </script>
