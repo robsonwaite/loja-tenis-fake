@@ -97,16 +97,16 @@
 
   <script>
     const products = [
-      { id:1, name:'Vans Old Skool Preto/Branco', price:449.90, img:'https://images.unsplash.com/photo-1618354692102-1edbb6f5ec7a?q=80&w=800&auto=format&fit=crop' },
-      { id:2, name:'Vans Era Checkerboard', price:399.90, img:'https://images.unsplash.com/photo-1603775020542-497f5165828e?q=80&w=800&auto=format&fit=crop' },
-      { id:3, name:'Vans Sk8-Hi Preto', price:479.00, img:'https://images.unsplash.com/photo-1593032465171-dc3129123b6a?q=80&w=800&auto=format&fit=crop' },
-      { id:4, name:'Vans Slip-On Classic', price:379.90, img:'https://images.unsplash.com/photo-1556906781-9d5d102f3a04?q=80&w=800&auto=format&fit=crop' },
-      { id:5, name:'Tênis de Trilha Mountain Pro', price:599.90, img:'https://images.unsplash.com/photo-1600185366274-53f8ad2fa93b?q=80&w=800&auto=format&fit=crop' },
-      { id:6, name:'Caixa de Som Bluetooth BassMax', price:349.90, img:'https://images.unsplash.com/photo-1580894908361-3e1ff1b7f4ab?q=80&w=800&auto=format&fit=crop' },
-      { id:7, name:'Caixa de Som Portátil SoundGo', price:279.90, img:'https://images.unsplash.com/photo-1573496770384-2f34ef4f4e71?q=80&w=800&auto=format&fit=crop' },
-      { id:8, name:'Pad de Bateria Eletrônica XP', price:499.90, img:'https://images.unsplash.com/photo-1606813901863-682c1d3b94b1?q=80&w=800&auto=format&fit=crop' },
-      { id:9, name:'Bateria Eletrônica Compacta', price:899.90, img:'https://images.unsplash.com/photo-1599384075900-bfd67b69df0d?q=80&w=800&auto=format&fit=crop' },
-      { id:10, name:'Kit de Pedais e Acessórios', price:249.90, img:'https://images.unsplash.com/photo-1627928011095-3e4b0ee65e2f?q=80&w=800&auto=format&fit=crop' }
+      { id:1, name:'Vans Old Skool Preto/Branco', price:449.90, img:'images/vans-old-skool.jpg' },
+      { id:2, name:'Vans Era Checkerboard', price:399.90, img:'images/vans-era.jpg' },
+      { id:3, name:'Vans Sk8-Hi Preto', price:479.00, img:'images/vans-sk8hi.jpg' },
+      { id:4, name:'Vans Slip-On Classic', price:379.90, img:'images/vans-slipon.jpg' },
+      { id:5, name:'Tênis de Trilha Mountain Pro', price:599.90, img:'images/tenis-trilha.jpg' },
+      { id:6, name:'Caixa de Som Bluetooth BassMax', price:349.90, img:'images/caixa-som1.jpg' },
+      { id:7, name:'Caixa de Som Portátil SoundGo', price:279.90, img:'images/caixa-som2.jpg' },
+      { id:8, name:'Pad de Bateria Eletrônica XP', price:499.90, img:'images/pad-bateria.jpg' },
+      { id:9, name:'Bateria Eletrônica Compacta', price:899.90, img:'images/bateria-compacta.jpg' },
+      { id:10, name:'Kit de Pedais e Acessórios', price:249.90, img:'images/pedais-kit.jpg' }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart_v1')||'{}');
@@ -136,73 +136,4 @@
 
     function viewDetails(id){
       const p = products.find(x=>x.id===id);
-      $modalBg.style.display='flex';
-      document.getElementById('modal-title').innerText = p.name;
-      document.getElementById('modal-body').innerHTML = `<img src="${p.img}" style="width:100%;border-radius:8px;margin-bottom:10px"><strong>Preço:</strong> ${formatBRL(p.price)}<br><br>Descrição: Produto fictício para demonstração. Nenhum pagamento será cobrado.`;
-    }
-
-    function saveCart(){localStorage.setItem('cart_v1',JSON.stringify(cart));renderCart();}
-
-    function addToCart(id){
-      cart[id] = cart[id]||{...products.find(p=>p.id===id),qty:0};
-      cart[id].qty++;
-      saveCart();
-      flash('Adicionado ao carrinho');
-    }
-
-    function renderCart(){
-      const keys = Object.keys(cart);
-      $cartItems.innerHTML='';
-      let total=0;let count=0;
-      if(keys.length===0){$cartItems.innerHTML='<div style="color:var(--muted)">Carrinho vazio</div>'}
-      keys.forEach(k=>{
-        const it = cart[k];
-        total += it.price * it.qty; count += it.qty;
-        const el = document.createElement('div');el.className='cart-item';
-        el.innerHTML = `<img src="${it.img}"><div style="flex:1"><div style="font-weight:600">${it.name}</div><div style="color:var(--muted);font-size:13px">${formatBRL(it.price)} x ${it.qty}</div></div><div class="qty"><button onclick="changeQty(${it.id},-1)">-</button><div style="min-width:22px;text-align:center">${it.qty}</div><button onclick="changeQty(${it.id},1)">+</button></div>`;
-        $cartItems.appendChild(el);
-      })
-      $cartTotal.innerText = formatBRL(total);
-      $cartCount.innerText = count;
-    }
-
-    function changeQty(id,delta){
-      if(!cart[id]) return; cart[id].qty += delta; if(cart[id].qty<=0) delete cart[id]; saveCart();
-    }
-
-    function flash(msg){
-      const el=document.createElement('div');el.style.position='fixed';el.style.right='18px';el.style.bottom='18px';el.style.background='#111';el.style.color='#fff';el.style.padding='10px 14px';el.style.borderRadius='8px';el.style.boxShadow='0 8px 24px rgba(2,6,23,.25)';el.innerText=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),1600);
-    }
-
-    $openCart.addEventListener('click',()=>{$drawer.classList.toggle('open')});
-    $checkoutBtn.addEventListener('click',()=>{
-      $modalBg.style.display='flex';
-      document.getElementById('modal-title').innerText='Checkout falso — Confirme seu pedido';
-      const keys = Object.keys(cart);
-      if(keys.length===0){document.getElementById('modal-body').innerHTML = '<div style="color:var(--muted)">Seu carrinho está vazio. Adicione algo antes de finalizar.</div>';}
-      else{
-        let html = '<div style="color:var(--muted);font-size:13px">Itens do pedido:</div><ul>';
-        keys.forEach(k=>{const it=cart[k];html+=`<li>${it.name} — ${it.qty} x ${formatBRL(it.price)}</li>`});html += '</ul><div style="margin-top:8px"><strong>Total: '+$cartTotal.innerText+'</strong></div><div style="margin-top:8px;color:var(--muted);font-size:13px">Este é apenas um protótipo — nenhum cartão será cobrado.</div>';
-        document.getElementById('modal-body').innerHTML = html;
-      }
-    });
-
-    $modalClose.addEventListener('click',()=>{$modalBg.style.display='none'});
-    $modalConfirm.addEventListener('click',()=>{
-      $modalBg.style.display='none'; $drawer.classList.remove('open');
-      cart = {}; saveCart();
-      flash('Pedido confirmado (fake). Obrigado por testar.');
-    });
-
-    $modalBg.addEventListener('click',(e)=>{if(e.target===$modalBg)$modalBg.style.display='none'});
-    $search.addEventListener('input',()=>{
-      const q = $search.value.trim().toLowerCase();
-      if(!q) renderProducts(products);
-      else renderProducts(products.filter(p=>p.name.toLowerCase().includes(q)));
-    });
-
-    renderProducts(products);
-    renderCart();
-  </script>
-</body>
-</html>
+      $modalBg.style.display='
