@@ -1,139 +1,56 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loja Fake - Vans & Mais</title>
-  <style>
-    :root{--accent:#0b5ed7;--muted:#6b7280}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;color:#111;background:#f6f8fb}
-    header{background:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(16,24,40,.06)}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#6c63ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    .title{font-weight:700}
-    .search{flex:1;margin:0 24px}
-    input.search-input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e9ef}
-    .cart-btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;border:0;cursor:pointer}
-
-    main{max-width:1100px;margin:28px auto;padding:0 18px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-    .card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(16,24,40,.06);display:flex;flex-direction:column}
-    .card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
-    .card h3{margin:12px 0 6px;font-size:16px}
-    .price{font-weight:700;color:var(--accent)}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
-    .add{margin-top:auto;display:flex;gap:8px}
-    button.secondary{background:#eef2ff;border:0;padding:10px;border-radius:8px;cursor:pointer}
-
-    footer{text-align:center;color:var(--muted);padding:22px 0;margin-top:28px}
-
-    .drawer{position:fixed;right:18px;top:84px;width:360px;max-width:92vw;background:#fff;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,.2);transform:translateX(120%);transition:transform .28s ease;z-index:60;padding:14px}
-    .drawer.open{transform:translateX(0)}
-    .drawer h4{margin:0 0 10px}
-    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f4f8}
-    .cart-item img{width:58px;height:44px;object-fit:cover;border-radius:6px}
-    .qty{display:flex;align-items:center;gap:6px}
-    .qty button{padding:6px;border-radius:6px;border:1px solid #e6e9ef;background:#fff}
-    .checkout{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
-
-    .modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.45);display:none;align-items:center;justify-content:center}
-    .modal{background:#fff;padding:20px;border-radius:12px;max-width:420px;width:92%}
-
-    @media(max-width:640px){header{padding:12px} .search{display:none}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loja Fake - Barão Von Gepeto</title>
+<style>
+body{font-family:sans-serif;background:#f6f8fb;margin:0;padding:0;}
+header{background:#0b5ed7;color:white;padding:12px;text-align:center;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:12px;}
+.card{background:white;padding:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center;}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:6px;}
+.card h3{font-size:16px;margin:8px 0;}
+.card .price{color:#0b5ed7;font-weight:bold;margin:4px 0;}
+.card button{background:#0b5ed7;color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;}
+footer{text-align:center;padding:16px;color:#555;}
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo">GV</div>
-      <div>
-        <div class="title">Barão Von Gepeto — Loja Fake</div>
-        <div class="muted" style="color:var(--muted);font-size:13px">Produtos fictícios para teste. Nenhum pagamento real.</div>
-      </div>
-    </div>
-    <div class="search"><input class="search-input" placeholder="Procurar produto..." id="search" /></div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="cart-btn" id="open-cart">Carrinho (<span id="cart-count">0</span>)</button>
-    </div>
-  </header>
 
-  <main>
-    <section>
-      <h2>Produtos</h2>
-      <p style="color:var(--muted)">Tênis Vans, tênis de trilha, caixas de som e itens para bateria eletrônica. Todos fictícios.</p>
-      <div class="grid" id="products"></div>
-    </section>
+<header>
+  <h1>Loja Fake - Vans, Trilhas, Som e Bateria</h1>
+  <p>Protótipo de teste, sem pagamentos reais.</p>
+</header>
 
-    <footer>
-      Criado por <strong>Barão Von Gepeto</strong> — protótipo estático. Divirta-se, Robson.
-    </footer>
-  </main>
+<div class="grid" id="products"></div>
 
-  <aside class="drawer" id="drawer">
-    <h4>Seu Carrinho</h4>
-    <div id="cart-items"></div>
-    <div class="checkout">
-      <div>
-        <div style="color:var(--muted);font-size:13px">Total</div>
-        <div id="cart-total" style="font-weight:700">R$ 0,00</div>
-      </div>
-      <div>
-        <button class="cart-btn" id="checkout-btn">Finalizar (fake)</button>
-      </div>
-    </div>
-  </aside>
+<footer>
+  Criado por <strong>Barão Von Gepeto</strong> - Loja Fake
+</footer>
 
-  <div class="modal-bg" id="modal-bg">
-    <div class="modal" id="modal">
-      <h3 id="modal-title">Checkout falso</h3>
-      <p id="modal-body">Este é um checkout de demonstração. Nenhum pagamento será processado.</p>
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-        <button class="secondary" id="modal-close">Fechar</button>
-        <button class="cart-btn" id="modal-confirm">Confirmar pedido (falso)</button>
-      </div>
-    </div>
-  </div>
+<script>
+const products = [
+  {name:'Vans Old Skool', price:'R$449,90', img:'https://www.vans.com/media/wysiwyg/old-skool-black-white.jpg'},
+  {name:'Vans Era Checkerboard', price:'R$399,90', img:'https://www.vans.com/media/wysiwyg/era-checkerboard.jpg'},
+  {name:'Vans Sk8-Hi Preto', price:'R$479,90', img:'https://www.vans.com/media/wysiwyg/sk8-hi-black.jpg'},
+  {name:'Vans Slip-On Classic', price:'R$379,90', img:'https://www.vans.com/media/wysiwyg/slip-on-classic.jpg'},
+  {name:'Tênis de Trilha Mountain Pro', price:'R$599,90', img:'https://www.adidas.com/media/wysiwyg/five-ten-mountain-pro.jpg'},
+  {name:'Caixa de Som Bluetooth BassMax', price:'R$349,90', img:'https://www.amazon.com.br/images/wysiwyg/caixa-som-bassmax.jpg'},
+  {name:'Caixa de Som Portátil SoundGo', price:'R$279,90', img:'https://www.amazon.com.br/images/wysiwyg/caixa-som-soundgo.jpg'},
+  {name:'Pad de Bateria Eletrônica XP', price:'R$499,90', img:'https://www.musicarts.com/images/wysiwyg/pad-bateria-xp.jpg'},
+  {name:'Bateria Eletrônica Compacta', price:'R$899,90', img:'https://www.yamaha.com/images/wysiwyg/bateria-compacta.jpg'},
+  {name:'Kit de Pedais e Acessórios', price:'R$249,90', img:'https://www.amazon.com.br/images/wysiwyg/pedais-kit.jpg'}
+];
 
-  <script>
-    const products = [
-      { id:1, name:'Vans Old Skool Preto/Branco', price:449.90, img:'images/vans-old-skool.jpg' },
-      { id:2, name:'Vans Era Checkerboard', price:399.90, img:'images/vans-era.jpg' },
-      { id:3, name:'Vans Sk8-Hi Preto', price:479.00, img:'images/vans-sk8hi.jpg' },
-      { id:4, name:'Vans Slip-On Classic', price:379.90, img:'images/vans-slipon.jpg' },
-      { id:5, name:'Tênis de Trilha Mountain Pro', price:599.90, img:'images/tenis-trilha.jpg' },
-      { id:6, name:'Caixa de Som Bluetooth BassMax', price:349.90, img:'images/caixa-som1.jpg' },
-      { id:7, name:'Caixa de Som Portátil SoundGo', price:279.90, img:'images/caixa-som2.jpg' },
-      { id:8, name:'Pad de Bateria Eletrônica XP', price:499.90, img:'images/pad-bateria.jpg' },
-      { id:9, name:'Bateria Eletrônica Compacta', price:899.90, img:'images/bateria-compacta.jpg' },
-      { id:10, name:'Kit de Pedais e Acessórios', price:249.90, img:'images/pedais-kit.jpg' }
-    ];
+const grid = document.getElementById('products');
+products.forEach(p=>{
+  const div = document.createElement('div');
+  div.className='card';
+  div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><div class="price">${p.price}</div><button>Adicionar ao Carrinho</button>`;
+  grid.appendChild(div);
+});
+</script>
 
-    let cart = JSON.parse(localStorage.getItem('cart_v1')||'{}');
-
-    const $products = document.getElementById('products');
-    const $cartCount = document.getElementById('cart-count');
-    const $drawer = document.getElementById('drawer');
-    const $cartItems = document.getElementById('cart-items');
-    const $cartTotal = document.getElementById('cart-total');
-    const $openCart = document.getElementById('open-cart');
-    const $checkoutBtn = document.getElementById('checkout-btn');
-    const $modalBg = document.getElementById('modal-bg');
-    const $modalClose = document.getElementById('modal-close');
-    const $modalConfirm = document.getElementById('modal-confirm');
-    const $search = document.getElementById('search');
-
-    function formatBRL(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
-
-    function renderProducts(items){
-      $products.innerHTML='';
-      items.forEach(p=>{
-        const div=document.createElement('div');div.className='card';
-        div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><div class="meta">Estoque disponível — 12 unidades</div><div class="price">${formatBRL(p.price)}</div><div class="add"><button class="secondary" onclick="viewDetails(${p.id})">Ver</button><button class="cart-btn" onclick="addToCart(${p.id})">Adicionar</button></div>`;
-        $products.appendChild(div);
-      })
-    }
-
-    function viewDetails(id){
-      const p = products.find(x=>x.id===id);
-      $modalBg.style.display='
+</body>
+</html>
